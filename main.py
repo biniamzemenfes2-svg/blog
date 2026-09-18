@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 
 # USE YOUR OWN npoint LINK! ADD AN IMAGE URL FOR YOUR POST. 👇
@@ -21,7 +21,14 @@ def about():
 def contact():
     return render_template("contact.html")
 
-
+@app.route("/messages", methods=["POST"])
+def messages():
+    if request.method == "POST":
+        name = request.form["username"]
+        email = request.form["email"]
+        phone_number = request.form["phonenumber"]
+        message = request.form["message"]
+    return "message successfully deliverd"
 @app.route("/post/<int:index>")
 def show_post(index):
     requested_post = None
