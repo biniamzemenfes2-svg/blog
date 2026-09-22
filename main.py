@@ -28,30 +28,31 @@ def contact():
 
 @app.route("/contact", methods=["POST"])
 def messages():
-    name = request.form["username"]
-    email = request.form["email"]
-    phone_number = request.form["phonenumber"]
-    message = request.form["message"]
+    if request.method == "POST":
+        name = request.form["username"]
+        email = request.form["email"]
+        phone_number = request.form["phonenumber"]
+        message = request.form["message"]
 
-    with smtplib.SMTP("smtp.gmail.com", 587) as connection:
-        connection.starttls()
-        connection.login(user=NAME, password=PASSWORD)
+        with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+            connection.starttls()
+            connection.login(user=NAME, password=PASSWORD)
 
-        connection.sendmail(
-            from_addr=NAME,
-            to_addrs="amitkidanu67@gmail.com",
-            msg=f"""Subject: New Contact Message
+            connection.sendmail(
+                from_addr=NAME,
+                to_addrs="amitkidanu67@gmail.com",
+                msg=f"""Subject: New Contact Message
 
-NAME: {name}
-EMAIL: {email}
-PHONE NUMBER: {phone_number}
-MESSAGE: {message}
-"""
-        )
+    NAME: {name}
+    EMAIL: {email}
+    PHONE NUMBER: {phone_number}
+    MESSAGE: {message}
+    """
+            )
 
     return render_template("contact.html")
 
-    
+
 @app.route("/post/<int:index>")
 def show_post(index):
     requested_post = None
