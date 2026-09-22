@@ -40,7 +40,7 @@ def messages():
 
             connection.sendmail(
                 from_addr=NAME,
-                to_addrs="amitkidanu67@gmail.com",
+                to_addrs="biniamzemenfes2@gmail.com",
                 msg=f"""Subject: New Contact Message
 
     NAME: {name}
